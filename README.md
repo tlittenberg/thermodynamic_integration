@@ -36,6 +36,12 @@ The first row of the file has the temperature for each of the parallel chains wi
      logL_0[1] logL_1[1] logL_2[1] ...
      ...
      ...
+     
+### Output file format
+ + `integrand.dat` : 2 column ASCII, 1st column is `log10 T` and the 2nd column is `<log L>`
+ + `evidence_chain.dat` : 2 column ASCII, 1st column is MCMC integration step, 2nd column is inferred evidence.
+ + `integrand_quantiles.dat` : 6 column ASCII, 1st column is `log10 T`, 2nd is the median integrand, 3rd and 4th are 25th and 75th quantile, and 5th and 6th are the 5th and 95th quantile.
+ + `evidence.dat` : 2 column ASCII, 1st column is the average evidence, 2nd column is the 1-sigma uncertainty on the evidence.
     
 ## Authors
  + Tyson B. Littenberg 
