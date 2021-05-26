@@ -105,7 +105,9 @@ int main(int argc, char *argv[])
      Tell us how you did
      */
     printf("Spline integration %.2f +/- %.2f\n",logEvidence,sqrt(varLogEvidence));
-    
+    FILE *evidence = fopen("evidence.dat","w");
+    fprintf(evidence,"%.2f %.2f\n",logEvidence,sqrt(varLogEvidence));
+    fclose(evidence);
     
     return 0;
 }
@@ -1000,7 +1002,12 @@ void ThermodynamicIntegration(double *temperature, double **loglikelihood, size_
         double int_05 = gsl_stats_quantile_from_sorted_data(integrand_draws[i], 1, mcmc_steps/downsample, 0.05);
         double int_95 = gsl_stats_quantile_from_sorted_data(integrand_draws[i], 1, mcmc_steps/downsample, 0.95);
         x = min + (max-min)*(double)(i+1)/(double)trap_steps;
-        fprintf(integrand_quantiles,"%lg %lg %lg %lg %lg %lg\n",log10(exp(x)),int_50, int_25, int_75, int_05, int_95);
+        fprintf(integrand_quantiles,"%lg %lg %lg %lg %lg %lg\n",log10(exp(x)),
+                int_50+base,
+                int_25+base,
+                int_75+base,
+                int_05+base,
+                int_95+base);
     }
     fclose(integrand_quantiles);
     
